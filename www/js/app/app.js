@@ -101,6 +101,7 @@ $(function() {
 		selectedCatEl = evt.target;
 		API.listByCategory("travel", util.displayListings, 1);
 	});
+
 	$('#donateBtn').on('click', function(evt) {
 		$('#donate').removeClass('previous');
 		$.UIGoToArticle('#donate');
@@ -110,6 +111,9 @@ $(function() {
 		$.UIGoToArticle('#main');
 	});
 
-	document.addEventListener("touchstart", function() {},false);
+	$(document).ready(function() {
+		console.log('touch start');
+		document.addEventListener("touchstart", function() {},false);
+	});
 	
 });
