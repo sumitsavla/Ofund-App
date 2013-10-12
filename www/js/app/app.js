@@ -166,9 +166,11 @@ selectedCatEl.css("background-color","#b5c03a");
 	});
 	$('#nearbyBtn').on('click', function(evt) {
 		$('#main').attr('class',' current ');
+		$('#pageHeader').removeClass('previous');
 		$.UIGoToArticle('#main');
 		util.getLatLong();
 		$('#main').attr('class',' current ');
+		$('#pageHeader').removeClass('previous');
 	});
 	$('#searchForm').on('submit', function(evt) {
 		selectedCatEl = $("#nearby");
