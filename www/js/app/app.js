@@ -77,7 +77,7 @@ $(function() {
 		}
 	};
 
-	util.getLocalListings();
+	util.getLatLong();
 
 	$('#homeBtn').on('click', function(evt) {
 		
@@ -120,7 +120,7 @@ $(function() {
 		$.UIGoToArticle('#donate');
 	});
 	$('#nearbyBtn').on('click', function(evt) {
-		util.getLocalListings();
+		util.getLatLong();
 	});
 
 	$(document).ready(function() {
