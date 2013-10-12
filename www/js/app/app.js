@@ -76,14 +76,16 @@ $(function() {
 	};
 
 	util.getLocalListings();
-	$("#segmentedPanel .button").on('blur', function(evt) {
-		$(selectedCatEl).css("background-color","");
-	});
+
 	$('#homeBtn').on('click', function(evt) {
 		
 		selectedCatEl = "#"+evt.target.id;
 		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("home_services", util.displayListings, 1);
+		window.setTimeout(function(){
+			console.log("dsd");
+			$(selectedCatEl).css("background-color","#000");
+		}, 5000);
 	});
 	$('#healthBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
