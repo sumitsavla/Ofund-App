@@ -54,7 +54,7 @@ $(function() {
 			for(i = 0; i < listingsArr.length; i++) {
 				listingContent = listingContent + "<li class='comp'>\
 							<aside>\
-								<img title='Hurry and Harm' src='css/images/music/Hurry and Harm.png' height='80px'>\
+								<img title='Hurry and Harm' src='css/images/icons/biz.jpeg' height='80px'>\
 							</aside>\
 							<div>\
 								<h3>"+util.toTitleCase(listingsArr[i].name)+"</h3>\
@@ -81,37 +81,70 @@ $(function() {
 
 	$('#homeBtn').on('click', function(evt) {
 		
-		selectedCatEl = "#"+evt.target.id;
-		$(selectedCatEl).css("background-color","#efeff4");
+		selectedCatEl = $("#"+evt.target.id);
+		
 		API.listByCategory("home_services", util.displayListings, 1);
+		$("#keyword").val("Home Services")
+		selectedCatEl.css("background-color","#b5c03a");
 		window.setTimeout(function(){
 			console.log("dsd");
-			$(selectedCatEl).css("background-color","#");
-		}, 500);
+			selectedCatEl.css("background-color","#efeff4");
+		}, 1000);
 	});
 	$('#healthBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		$(selectedCatEl).css("background-color","#b5c03a");
+		selectedCatEl.css("background-color","#b5c03a");
+		window.setTimeout(function(){
+			console.log("dsd");
+			selectedCatEl.css("background-color","#efeff4");
+		}, 1000)
+				$("#keyword").val("Health Services")
+
 		API.listByCategory("health", util.displayListings, 1);
+
 	});
 	$('#bizBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		$(selectedCatEl).css("background-color","#b5c03a");
+				$("#keyword").val("Business Services")
+
+	selectedCatEl.css("background-color","#b5c03a");
+		window.setTimeout(function(){
+			console.log("dsd");
+			selectedCatEl.css("background-color","#efeff4");
+		}, 1000);
 		API.listByCategory("business_services", util.displayListings, 1);
 	});
 	$('#restaurantsBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		$(selectedCatEl).css("background-color","#b5c03a");
+				$("#keyword").val("Restaurants")
+
+	selectedCatEl.css("background-color","#b5c03a");
+		window.setTimeout(function(){
+			console.log("dsd");
+			selectedCatEl.css("background-color","#efeff4");
+		}, 1000);
 		API.listByCategory("restaurant", util.displayListings, 1);
 	});
 	$('#shoppingBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		$(selectedCatEl).css("background-color","#b5c03a");
+				$("#keyword").val("Shopping")
+
+	selectedCatEl.css("background-color","#b5c03a");
+		window.setTimeout(function(){
+			console.log("dsd");
+			selectedCatEl.css("background-color","#efeff4");
+		}, 1000);
 		API.listByCategory("shopping", util.displayListings, 1);
 	});
 	$('#travelBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		$(selectedCatEl).css("background-color","#b5c03a");
+				$("#keyword").val("Travel")
+selectedCatEl.css("background-color","#b5c03a");
+		window.setTimeout(function(){
+			console.log("dsd");
+			selectedCatEl.css("background-color","#efeff4");
+		}, 1000);
+	//	$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("travel", util.displayListings, 1);
 	});
 
@@ -125,9 +158,9 @@ $(function() {
 	});
 	$('#nearbyBtn').on('click', function(evt) {
 		util.getLatLong();
-		//$('#main').removeClass('previous');
-		//$('#main').addClass('current');
+		$('#main').attr('class',' current ');
 		$.UIGoToArticle('#main');
+		$('#main').attr('class',' current ');
 	});
 	$('#searchForm').on('submit', function(evt) {
 		selectedCatEl = $("#nearby");
@@ -137,7 +170,22 @@ $(function() {
 
 	$(document).ready(function() {
 		console.log('touch start');
-		document.addEventListener("touchstart", function() {},false);
+	//	document.addEventListener("touchstart", function() {},false);
+	 $("a").each(function() { // have to use an `each` here - either a jQuery `each` or a `for(...)` loop
+                var onClick; // this will be a function
+                var firstClick = function() {
+                    onClick = secondClick;
+                    return false;
+                };
+                var secondClick = function() {
+                    onClick = firstClick;
+                    return true;
+                };
+                onClick = firstClick;
+                $(this).click(function() {
+                    return onClick();
+                });
+            });
 	});
 	
 });
