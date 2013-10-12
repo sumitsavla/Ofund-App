@@ -82,12 +82,12 @@ $(function() {
 	$('#homeBtn').on('click', function(evt) {
 		
 		selectedCatEl = "#"+evt.target.id;
-		$(selectedCatEl).css("background-color","#b5c03a");
+		$(selectedCatEl).css("background-color","#efeff4");
 		API.listByCategory("home_services", util.displayListings, 1);
 		window.setTimeout(function(){
 			console.log("dsd");
-			$(selectedCatEl).css("background-color","#000");
-		}, 5000);
+			$(selectedCatEl).css("background-color","#");
+		}, 500);
 	});
 	$('#healthBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
@@ -122,6 +122,11 @@ $(function() {
 	$('#nearbyBtn').on('click', function(evt) {
 		util.getLatLong();
 	});
+	$('#searchForm').on('submit', function(evt) {
+		selectedCatEl = $("#nearby");
+		API.listByKeyword($("#keyword").val(), util.displayListings, 1);
+	});
+
 
 	$(document).ready(function() {
 		console.log('touch start');
