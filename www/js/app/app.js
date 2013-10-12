@@ -10,11 +10,10 @@ $(function() {
 		e.stopPropagation();
 		$("#pageHeader h1").html(segmentedOptions.labels[selectedPanel]);
 	};
-//	var newSegmented = $.UICreateSegmented(segmentedOptions);
 	$('.segmented').UISegmented({callback:segmentedResponse});
 	$('.segmented').UIPanelToggle('#toggle-panels',function(){$.noop;});
 
-	$.UISlideout();
+	//$.UISlideout();
 	$('.slide-out > section').append(
 		'<h2>Your Stuff</h2>\
 		<ul class="list">\
@@ -102,5 +101,7 @@ $(function() {
 		selectedCatEl = evt.target;
 		API.listByCategory("travel", util.displayListings, 1);
 	});
+	
+	document.addEventListener("touchstart", function() {},false);
 	
 });

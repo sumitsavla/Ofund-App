@@ -23,8 +23,12 @@
 			height:45px;
 		}		}
 		.segmented > .catIcon.selected,
-		a:hover {
+		a:active {
 			background-color: aliceblue;;
+		}
+
+		#segmentedPanel .button {
+			border: solid 2px rgba(0, 122, 255, 0.21);
 		}
 	</style>
 	<script src="js/lib/chocolatechip-3.0.4.js"></script>
@@ -38,6 +42,14 @@
 	</nav>
 	<article id="main" class="current">
 		<section>
+			<div id="searchForm">
+				<form>
+					<div id = "searchField"> 
+						<input id="keyword" type="text" name="keyword" placeholder = "Search business" autocorrect="off" style="width: 85%;margin-left: 7px;">
+						<img src="css/images/icons/icon_search.gif" style="margin-bottom: -3px;">
+					</div>
+				</form>
+			</div>
 			<div id="segmentedPanel" class="horizontal centered" style="display: inline;">
 				<div class="segmented" style="margin:0px;">
 					<a id = "homeBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/HomeServices.png') no-repeat;background-position:center;width:50px;" ></a>
