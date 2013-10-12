@@ -94,7 +94,7 @@ $(function() {
 		selectedCatEl = evt.target;
 		API.listByCategory("shopping", util.displayListings, 1);
 	});
-	$('#travel').on('click', function(evt) {
+	$('#travelBtn').on('click', function(evt) {
 		selectedCatEl = evt.target;
 		API.listByCategory("travel", util.displayListings, 1);
 	});
