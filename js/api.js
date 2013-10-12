@@ -7,6 +7,7 @@
 		serialize;
 
 	ajax = function(query, callback) {
+		console.log("Requesting... "+url + query)
 		$.ajax({
 			url: url + query,
 			type: "GET",
