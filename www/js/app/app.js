@@ -118,8 +118,7 @@ $(function() {
 		$.UIGoToArticle('#donate');
 	});
 	$('#nearbyBtn').on('click', function(evt) {
-		$('#main').removeClass('previous');
-		$.UIGoToArticle('#main');
+		util.getLocalListings();
 	});
 
 	$(document).ready(function() {
