@@ -19,68 +19,35 @@
 		.isWin .icon {
 			border-radius: 0;
 		}
-		.button {
-			content: '';
-			display: block;
-			height: 30px;
-			width: 30px;
-			background-color: #929292;
-			-webkit-mask-position: center center;
-			-webkit-mask-size: 100%;
-			-webkit-mask-repeat: no-repeat;
-		}
-		.button.selected,
-		.button:hover {
-			background-color: #007aff;
-		}
-		.button.music {
-			-webkit-mask-image: url('css/images/icons/Head_phones.svg');
-		}
-		.button.pictures   {
-			-webkit-mask-image: url('css/images/icons/Camera.svg');
-		}
-		.button.docs  {
-			-webkit-mask-image: url('css/images/icons/Documents.svg');
-		}
-		.button.recipes   {
-			-webkit-mask-image: url('css/images/icons/Download.svg');
-		}
-		.button.top_rated  {
-			-webkit-mask-image: url('css/images/icons/Favorite.svg');
+		a.catIcon {
+			height:35px;
+		}		}
+		.segmented > .catIcon.selected,
+		a:hover {
+			background-color: aliceblue;;
 		}
 
 	</style>
 	<script src="js/lib/chocolatechip-3.0.4.js"></script>
 	<script src="js/lib/chui-3.0.4.js"></script>
 	<script src="js/app/app.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			var segmentedOptions = {
-				id: 'bizCategories',
-				imagePath : "css/images/",
-		     	icons : ["music", "pictures", "docs", "recipes", "top_rated"],
-		      	labels : ["Home Services", "Health", "Restaurants", "Business Services"],
-				selected: 1
-			};
-			var segmentedResponse = function(e) {
-				e.stopPropagation();
-				$('#output').find('h3 > span').html(($(this).index() + 1));
-			};
-			var newSegmented = $.UICreateSegmented(segmentedOptions);
-			$('#segmentedPanel').append(newSegmented);
-			$('.segmented').UISegmented({callback:segmentedResponse});
-			$('.segmented').UIPanelToggle('#toggle-panels',function(){$.noop;});
-			var selectedPanel = $('.segmented').find('.selected').index();
-		});
-	</script>
 </head>
 <body>
-	<nav>
-		<h1>Bussinesses Nearby</h1>
+	<nav id="pageHeader">
+		<h1>Nearby Business</h1>
 	</nav>
 	<article id="main" class="current">
 		<section>
-			<div id='segmentedPanel' class='horizontal centered'></div>
+			<div id="segmentedPanel" class="horizontal centered">
+				<div class="segmented">
+					<a role="radio" class="button catIcon" style="background: url('css/images/icons/HomeServices.png') no-repeat;background-position:center;width:40px;" ></a>
+					<a role="radio" class="button catIcon" style="background: url('css/images/icons/health.png') no-repeat;background-position:center;width:40px;"></a>
+					<a role="radio" class="button catIcon" style="background: url('css/images/icons/restaurant.png') no-repeat;background-position:center;width:40px;"></a>
+					<a role="radio" class="button catIcon selected" aria-checked="true" style="background: url('css/images/icons/businessservices.png') no-repeat;background-position:center;width:40px;"></a>
+					<a role="radio" class="button catIcon" aria-checked="true" style="background: url('css/images/icons/shopping.png') no-repeat;background-position:center;width:40px;"></a>
+					<a role="radio" class="button catIcon" aria-checked="true" style="background: url('css/images/icons/travel.png') no-repeat;background-position:center;width:40px;"></a>
+				</div>
+			</div>
 			<div id="toggle-panels">
 				<div>
 					<ul class='list'>
