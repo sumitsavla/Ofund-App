@@ -76,29 +76,38 @@ $(function() {
 	};
 
 	util.getLocalListings();
-
+	$("#segmentedPanel .button").on('blur', function(evt) {
+		$(selectedCatEl).css("background-color","");
+	});
 	$('#homeBtn').on('click', function(evt) {
-		selectedCatEl = evt.target; 
+		
+		selectedCatEl = "#"+evt.target.id;
+		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("home_services", util.displayListings, 1);
 	});
 	$('#healthBtn').on('click', function(evt) {
-		selectedCatEl = evt.target;
+		selectedCatEl = $("#"+evt.target.id);
+		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("health", util.displayListings, 1);
 	});
 	$('#bizBtn').on('click', function(evt) {
-		selectedCatEl = evt.target;
+		selectedCatEl = $("#"+evt.target.id);
+		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("business_services", util.displayListings, 1);
 	});
 	$('#restaurantsBtn').on('click', function(evt) {
-		selectedCatEl = evt.target;
+		selectedCatEl = $("#"+evt.target.id);
+		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("restaurant", util.displayListings, 1);
 	});
 	$('#shoppingBtn').on('click', function(evt) {
-		selectedCatEl = evt.target;
+		selectedCatEl = $("#"+evt.target.id);
+		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("shopping", util.displayListings, 1);
 	});
 	$('#travelBtn').on('click', function(evt) {
-		selectedCatEl = evt.target;
+		selectedCatEl = $("#"+evt.target.id);
+		$(selectedCatEl).css("background-color","#b5c03a");
 		API.listByCategory("travel", util.displayListings, 1);
 	});
 
