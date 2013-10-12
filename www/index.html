@@ -6,8 +6,17 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="msapplication-tap-highlight" content="no">
-	<title>Opportunity Fund Business</title>
-	<link rel="stylesheet" href="css/chui.ios-3.0.4.css">
+	<title>Opportunity Fund</title>
+	<script>
+		var uagent = (navigator.userAgent.match(/Android/i) ? "android" : "ios");
+		var elem = document.createElement("link");
+		elem.setAttribute("rel", "stylesheet");
+		elem.setAttribute("type", "text/css");
+		elem.setAttribute("href", "css/chui." + uagent + "-3.0.4.css");
+		 if(elem) {
+		 	document.getElementsByTagName("head")[0].appendChild(elem);
+		}		
+	</script>
 	<style>
 		/* Border Radius for each OS: */
 		.isiOS .icon {
