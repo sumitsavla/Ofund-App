@@ -1,5 +1,6 @@
 $(function() {
-	var util, selectedCatEl, bizimage,currentListingArr, segmentedOptions = {
+	var util, selectedCatEl, bizimage = "css/images/icons/home.jpeg",
+	currentListingArr, segmentedOptions = {
 		id: 'bizCategories',
       	labels : ["Home Services", "Health", "Restaurants", "Business Services", "Shopping", "Travel"],
 		selected: 1
@@ -54,11 +55,12 @@ $(function() {
 			for(i = 0; i < listingsArr.length; i++) {
 				listingContent = listingContent + "<li class='comp'>\
 							<aside>\
-								<img title='Hurry and Harm' src="+bizimage+" height='80px'>\
+								<img title='Hurry and Harm' src='"+bizimage+"' height='80px'>\
 							</aside>\
 							<div>\
 								<h3>"+util.toTitleCase(listingsArr[i].name)+"</h3>\
 								<h4>"+util.toTitleCase(listingsArr[i].codeDescription)+"</h4>\
+								<h4>"+util.toTitleCase(listingsArr[i].city)+"</h4>\
 							</div>\
 						</li>";
 			}
@@ -82,7 +84,7 @@ $(function() {
 	$('#homeBtn').on('click', function(evt) {
 		
 		selectedCatEl = $("#"+evt.target.id);
-		bizimage = "css/images/icon/home.jpeg";
+		bizimage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkteQleGRaWt6vzI6KfC-_XmczV7AeBkx6Do_XLWwAheihZkll";
 		API.listByCategory("home_services", util.displayListings, 1);
 		$("#keyword").val("Home Services")
 		selectedCatEl.css("background-color","#b5c03a");
@@ -93,7 +95,7 @@ $(function() {
 	});
 	$('#healthBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		bizimage = "css/images/icon/home.jpeg";
+		bizimage = "http://www.1800treatme.com/wp-content/uploads/2012/07/medical-Doctors.jpg";
 		selectedCatEl.css("background-color","#b5c03a");
 		window.setTimeout(function(){
 			console.log("dsd");
@@ -106,7 +108,7 @@ $(function() {
 	});
 	$('#bizBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		bizimage = "css/images/icon/bizs.jpeg";
+		bizimage = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTPa3HG3lA3UcEeLxo8KKl1aLligusfdIAivnvfuXtwZe9U9r8e";
 				$("#keyword").val("Business Services")
 
 	selectedCatEl.css("background-color","#b5c03a");
@@ -118,7 +120,7 @@ $(function() {
 	});
 	$('#restaurantsBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		bizimage = "css/images/icon/rest.jpeg";
+		bizimage = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpp_1mdJSYWG2ts_1ws7oyVwX1aU7vBdtF_1QV7pI3jWOZVtq4";
 				$("#keyword").val("Restaurants")
 
 	selectedCatEl.css("background-color","#b5c03a");
@@ -130,7 +132,7 @@ $(function() {
 	});
 	$('#shoppingBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		bizimage = "css/images/icon/home.jpeg";
+		bizimage = "http://www.bubblews.com/assets/images/news/1257549438_1370386595.jpg";
 				$("#keyword").val("Shopping")
 
 	selectedCatEl.css("background-color","#b5c03a");
@@ -142,7 +144,7 @@ $(function() {
 	});
 	$('#travelBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
-		bizimage = "css/images/icon/travel.jpeg";
+		bizimage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3XPM-uWushVXusSBCgldpq1l1laa0tZQzrJPFZmDpmMDpEORr";
 				$("#keyword").val("Travel")
 selectedCatEl.css("background-color","#b5c03a");
 		window.setTimeout(function(){
@@ -160,6 +162,7 @@ selectedCatEl.css("background-color","#b5c03a");
 	$('ul.list').on('click', function(evt) {
 		$('#details').removeClass('previous');
 		$.UIGoToArticle('#details');
+		$('#details').removeClass('previous');
 	});
 	$('#nearbyBtn').on('click', function(evt) {
 		$('#main').attr('class',' current ');

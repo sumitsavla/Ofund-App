@@ -97,31 +97,6 @@
 			background-color: #b5c03a;
 		}
 	</style>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-	<script>
-	var map;
-	function initialize() {
-	  var myLatlng = new google.maps.LatLng(37.268106,-121.844685);
-	  var mapOptions = {
-	    zoom: 12,
-	    center: myLatlng,
-	    mapTypeId: google.maps.MapTypeId.ROADMAP
-	  }
-	  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-	  var marker = new google.maps.Marker({
-	      position: myLatlng,
-	      map: map,
-	      title: 'San Jose'
-	  });
-	}
-	google.maps.event.addDomListener(window, 'load', initialize);
-	
-	rand = Math.floor((Math.random()*10)+1);
-	$(function() {
-		$("#biz_img").attr("src", travel[rand]);
-	});
-    </script>
 </head>
 <body>
 	<nav id="pageHeader" style="width: 100%;
@@ -236,5 +211,31 @@ padding-right: 0px;">
 		<script src="js/api.js"></script>
 
 	<script src="js/app/app.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script>
+	var map;
+	function initialize() {
+	  var myLatlng = new google.maps.LatLng(37.268106,-121.844685);
+	  var mapOptions = {
+	    zoom: 12,
+	    center: myLatlng,
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  }
+	  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	  var marker = new google.maps.Marker({
+	      position: myLatlng,
+	      map: map,
+	      title: 'San Jose'
+	  });
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+	rand = Math.floor((Math.random()*10)+1);
+	$(function() {
+		$("#biz_img").attr("src", travel[rand]);
+	});
+    </script>	
 </body>
 </html>
