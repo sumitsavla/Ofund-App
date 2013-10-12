@@ -111,6 +111,15 @@ $(function() {
 		API.listByCategory("travel", util.displayListings, 1);
 	});
 
+	$('#donateBtn').on('click', function(evt) {
+		$('#donate').removeClass('previous');
+		$.UIGoToArticle('#donate');
+	});
+	$('#nearbyBtn').on('click', function(evt) {
+		$('#main').removeClass('previous');
+		$.UIGoToArticle('#main');
+	});
+
 	$(document).ready(function() {
 		console.log('touch start');
 		document.addEventListener("touchstart", function() {},false);

@@ -39,6 +39,22 @@
 		#segmentedPanel .button {
 			border: solid 1px #9A9FA5;;
 		}
+		.donateImage {
+			background-image:url('css/images/donate.png');
+			height: 2055px;
+			width: 320px;
+			background-size: 320px 2055px;
+			background-repeat:no-repeat;
+			overflow-x:scroll;
+		}
+
+		article {
+			top: 0px;
+		}
+
+		section {
+			padding-bottom: 0px !important;
+		}
 	</style>
 	<script src="js/lib/chocolatechip-3.0.4.js"></script>
 	<script src="js/lib/chui-3.0.4.js"></script>
@@ -111,8 +127,15 @@ padding-right: 0px;">
 			</div>
 		</section>
 	</article>
+	
+	<article id="donate">
+		<section>
+			<div class="donateImage"></div>
+		</section>
+	</article>
+
 	<div class="tabbar">
-		<a class="button selected"><span class="icon" style="background: url('css/images/icons/nearby.png') no-repeat;background-position:center;"></span><label>Nearby</label></a>
+		<a id="nearbyBtn" class="button selected"><span class="icon" style="background: url('css/images/icons/nearby.png') no-repeat;background-position:center;"></span><label>Nearby</label></a>
 		<a id="friendsBtn" class="button"><span class="icon" style="background: url('css/images/icons/friends.png') no-repeat;background-position:center;"></span><label>Friends</label></a>
 		<a id="donateBtn" class="button"><span class="icon" style="background: url('css/images/icons/donate.png') no-repeat;background-position:center;"></span><label>Donate</label></a>
 	</div>
