@@ -1,5 +1,5 @@
 $(function() {
-	var util, segmentedOptions = {
+	var util, selectedCatEl, segmentedOptions = {
 		id: 'bizCategories',
       	labels : ["Home Services", "Health", "Restaurants", "Business Services", "Shopping", "Travel"],
 		selected: 1
@@ -40,67 +40,15 @@ $(function() {
 		},
 
 		displayLocalListings: function(listingsArr) {
-			var i, listingContent = "";
-		/*	listingsArr = [
-    {
-      "phoneNumber1": 5107341676,
-      "city": "EL CERRITO",
-      "code": 488510,
-      "name": "MANUEL BALTAZAR DE DIOS",
-      "zip": "94530-2379",
-      "loc": {
-        "lat": 37.917215,
-        "lon": -122.311445
-      },
-      "phone2": "",
-      "codeDescription": "FREIGHT TRANSPORTATION ARRANGEMENT ",
-      "phone1Label": "Home",
-      "county": "CONTRA COSTA",
-      "street": "10944 SAN PABLO AVE APT 712",
-      "productServiceDescription": "CONTRACTOR",
-      "phone2Label": null,
-      "_id": "52592f7e4f6614b81a000001"
-    },
-    {
-      "phoneNumber1": 5109789542,
-      "city": "OAKLAND",
-      "code": 454390,
-      "name": "LA VERBENA LLC II",
-      "zip": "94603",
-      "loc": {
-        "lat": 37.730335,
-        "lon": -122.1828625
-      },
-      "phone2": "MOBILE",
-      "codeDescription": "FRUIT STANDS TEMPORARY",
-      "phone1Label": "MOBILE",
-      "county": "ALAMEDA",
-      "street": "219 KERWIN AVE",
-      "productServiceDescription": "FOOD/RESTAURANT",
-      "phone2Label": 5109789542,
-      "_id": "52592f7e4f6614b81a000002"
-    },
-    {
-      "phoneNumber1": null,
-      "city": "SAUSALITO",
-      "code": 722511,
-      "name": "MANGIA E. BEVI, INC DBA DIVINO SAUSALITO",
-      "zip": "94965-2116",
-      "loc": {
-        "lat": 37.85838750000001,
-        "lon": -122.4849474
-      },
-      "phone2": "Mobile",
-      "codeDescription": "FULL SERVICE  RESTAURANTS",
-      "phone1Label": "Home",
-      "county": "MARIN",
-      "street": "37 CALEDONIA ST",
-      "productServiceDescription": "FOOD/RESTAURANT",
-      "phone2Label": 4152332978,
-      "_id": "52592f7e4f6614b81a000003"
-    }];*/
 			console.log(listingsArr);
-			for(i = 0; i < listingsArr.length; i++){
+			
+			$("#nearby .list").append(util.genListingContent(listingsArr))
+			$("#nearby").show();
+		},
+
+		genListingContent: function(listingsArr){
+			var i, listingContent = ""; 
+			for(i = 0; i < listingsArr.length; i++) {
 				listingContent = listingContent + "<li class='comp'>\
 							<aside>\
 								<img title='Hurry and Harm' src='css/images/music/Hurry and Harm.png' height='80px'>\
@@ -110,14 +58,13 @@ $(function() {
 								<h4>"+util.toTitleCase(listingsArr[i].codeDescription)+"</h4>\
 							</div>\
 						</li>";
-				
 			}
-			$("#nearby .list").append(listingContent)
-			$("#nearby").show();
+			return listingContent;
 		},
 
 		displayListings: function(data){
-
+			$(selectedCatEl+" .list").append(util.genListingContent(listingsArr))
+			$(selectedCatEl).show();
 		},
 
 		toTitleCase: function(str) {
@@ -127,23 +74,29 @@ $(function() {
 
 	util.getLocalListings();
 
-	$('#home').on('click', function() {
+	$('#homeBtn').on('click', function(evt) {
+		selectedCatEl = evt.target; 
 		API.listByCategory("home_services", util.displayListings, 1);
 	});
-	$('#health').on('click', function() {
-		API.listByCategory("home_services", util.displayListings, 1);
+	$('#healthBtn').on('click', function(evt) {
+		selectedCatEl = evt.target;
+		API.listByCategory("health", util.displayListings, 1);
 	});
-	$('#biz').on('click', function() {
-		API.listByCategory("home_services", util.displayListings, 1);
+	$('#bizBtn').on('click', function(evt) {
+		selectedCatEl = evt.target;
+		API.listByCategory("business_services", util.displayListings, 1);
 	});
-	$('#restaurants').on('click', function() {
-		API.listByCategory("home_services", util.displayListings, 1);
+	$('#restaurantsBtn').on('click', function(evt) {
+		selectedCatEl = evt.target;
+		API.listByCategory("restaurant", util.displayListings, 1);
 	});
-	$('#shopping').on('click', function() {
-		API.listByCategory("home_services", util.displayListings, 1);
+	$('#shoppingBtn').on('click', function(evt) {
+		selectedCatEl = evt.target;
+		API.listByCategory("shopping", util.displayListings, 1);
 	});
-	$('#travel').on('click', function() {
-		API.listByCategory("home_services", util.displayListings, 1);
+	$('#travel').on('click', function(evt) {
+		selectedCatEl = evt.target;
+		API.listByCategory("travel", util.displayListings, 1);
 	});
 	
 });
