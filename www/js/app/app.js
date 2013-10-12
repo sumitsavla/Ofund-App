@@ -162,9 +162,9 @@ selectedCatEl.css("background-color","#b5c03a");
 		$.UIGoToArticle('#details');
 	});
 	$('#nearbyBtn').on('click', function(evt) {
-		util.getLatLong();
 		$('#main').attr('class',' current ');
 		$.UIGoToArticle('#main');
+		util.getLatLong();
 		$('#main').attr('class',' current ');
 	});
 	$('#searchForm').on('submit', function(evt) {
