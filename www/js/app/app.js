@@ -28,7 +28,9 @@ $(function() {
 	util = {
 		getLocalListings: function() {
 			if (navigator.geolocation) {
-  			   navigator.geolocation.getCurrentPosition(this.getLatLong);
+  			   navigator.geolocation.getCurrentPosition(this.getLatLong, function() {
+  			   	alert("Unable to get location information!");
+  			   });
     		} else {
     			alert("Geolocation is not supported by this browser.");
 			}
