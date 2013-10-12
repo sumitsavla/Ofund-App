@@ -101,7 +101,10 @@ $(function() {
 		selectedCatEl = evt.target;
 		API.listByCategory("travel", util.displayListings, 1);
 	});
-	
-	document.addEventListener("touchstart", function() {},false);
+
+	$(document).ready(function() {
+		console.log('touch start');
+		document.addEventListener("touchstart", function() {},false);
+	});
 	
 });
