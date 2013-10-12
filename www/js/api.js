@@ -7,7 +7,8 @@
 		serialize;
 
 	ajax = function(query, callback) {
-		console.log("Requesting... "+url + query)
+		console.log("Requesting... "+url + query);
+		//$.body.UIBlock();
 		$.ajax({
 			url: url + query,
 			type: "GET",
@@ -16,11 +17,16 @@
 			},
 			dataType: "json",
 			success: function(data) {
+				$.body.UIUnblock();
 				callback(data.data);
 			},
 			error: function() {
 				//hack - 
+				$.body.UIUnblock();
 				callback([]);
+			},
+			complete: function() {
+				$.body.UIUnblock();
 			}
 		});
 	};
