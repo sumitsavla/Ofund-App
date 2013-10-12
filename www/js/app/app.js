@@ -125,6 +125,9 @@ $(function() {
 	});
 	$('#nearbyBtn').on('click', function(evt) {
 		util.getLatLong();
+		//$('#main').removeClass('previous');
+		//$('#main').addClass('current');
+		$.UIGoToArticle('#main');
 	});
 	$('#searchForm').on('submit', function(evt) {
 		selectedCatEl = $("#nearby");
