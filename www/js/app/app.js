@@ -152,6 +152,10 @@ selectedCatEl.css("background-color","#b5c03a");
 		$('#donate').removeClass('previous');
 		$.UIGoToArticle('#donate');
 	});
+	$('ul.list').on('click', function(evt) {
+		$('#details').removeClass('previous');
+		$.UIGoToArticle('#details');
+	});
 	$('#nearbyBtn').on('click', function(evt) {
 		util.getLatLong();
 		$('#main').attr('class',' current ');
