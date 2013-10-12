@@ -1,9 +1,10 @@
 (function() {
 
 	var API,
-		url = "http://locahost:7007/?",
-		appid = "ohack_2013_ebay_ofund",
-		ajax;
+		url = "http://ofund.aws.af.cm/?",
+		appid = "",
+		ajax,
+		serialize;
 
 	ajax = function(query, callback) {
 		$.ajax({
@@ -23,13 +24,36 @@
 		});
 	};
 
-	API = {
-		listByLocation: function(lat, lon, callback, page) {
-			ajax("", callback);
-		}
+	serialize = function(obj) {
+		var str = [];
+		for(var p in obj)
+			str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+		return str.join("&");
 	};
 
-	console.log(API);
+	API = {
+		listByLocation: function(lat, lon, callback, page) {
+			ajax(serialize({
+				lat:lat,
+				lon:lon,
+				page:page
+			}), callback);
+		},
+
+		listByKeyword: function(keyword, callback, page) {
+			ajax(serialize({
+				keyword:keyword,
+				page:page
+			}), callback);
+		},
+
+		listByCategory: function(category, callback, page) {
+			ajax(serialize({
+				category:category,
+				page:page
+			}), callback);
+		}				
+	};
 
 	window.API = API;
 }());
