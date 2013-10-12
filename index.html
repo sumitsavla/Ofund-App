@@ -6,38 +6,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="msapplication-tap-highlight" content="no">
-	<title>Demo</title>
+	<title>Opportunity Fund Business</title>
 	<link rel="stylesheet" href="css/chui.ios-3.0.4.css">
 	<style>
-		.icon {
-			height: 40px;
-			width: 40px;
-			background-repeat: no-repeat;
-			background-position: center center;
-			background-size: auto 70%;
-		}
-		.icon.weather {
-			background-color: #29abe2;
-			background-image: url(css/images/app-icons/weather.png);
-			background-size: 70% auto;
-		}
-		.icon.mail {
-			background-color: #52c5d0;
-			background-image: url(css/images/app-icons/mail.png);
-			background-size: 70% auto;
-		}
-		.icon.music {
-			background-color: #f38133;
-			background-image: url(css/images/app-icons/music.png);
-		}
-		.icon.browser {
-			background-color: #ed453a;
-			background-image: url(css/images/app-icons/browser.png);
-		}
-		.icon.app {
-			background-color: #6ec05c;
-			background-image: url(css/images/app-icons/app.png);
-		}
 		/* Border Radius for each OS: */
 		.isiOS .icon {
 			border-radius: 10px;
@@ -48,661 +19,251 @@
 		.isWin .icon {
 			border-radius: 0;
 		}
-		
-		/* Popup Demo Styles */
-		#popupMessageTarget {
-			opacity: 0;
-			font-size: 12pt;
-			line-height: 14pt;
-			font-family: 'HelveticaNeue-Light';
-			color: #007aff;
-			padding: 0 15px;
-			margin: 0;
+		.button {
+			content: '';
+			display: block;
+			height: 30px;
+			width: 30px;
+			background-color: #929292;
+			-webkit-mask-position: center center;
+			-webkit-mask-size: 100%;
+			-webkit-mask-repeat: no-repeat;
 		}
-		.animatePopupMessage {
-			-webkit-animation-duration: 2s;
-			-webkit-animation-timing-function: linear;
-			-webkit-animation-name: updatePopupMessage;
+		.button.selected,
+		.button:hover {
+			background-color: #007aff;
 		}
-		
-		@-webkit-keyframes updatePopupMessage {
-			0% { opacity: 0; }
-			20% { opacity: 1; }
-			90% { opacity: 1; }
-			100% { opacity: 0; }
+		.button.music {
+			-webkit-mask-image: url('css/images/icons/Head_phones.svg');
 		}
-		.popover-buttons {
-			margin-bottom: 20px;
-			padding: 0 40px;
+		.button.pictures   {
+			-webkit-mask-image: url('css/images/icons/Camera.svg');
 		}
-		.popover-buttons > .button {
-			display: -webkit-box;
-			display: -webkit-flex;
-			border: solid 1px #007aff;
-			padding: 4px 15px;
-			border-left: none;
-			background-color: rgba(255,255,255,.65);
-			width: auto;
-			overflow-x: hidden;
-			-webkit-transition: none;
-			transition: none;
-			font-size: 10pt;
-			-webkit-box-align: center;
-			-webkit-box-pack: center;
-			-webkit-box-flex: 1;
-			-wekbit-flex: 1;
-			text-align: center;
+		.button.docs  {
+			-webkit-mask-image: url('css/images/icons/Documents.svg');
 		}
-		
-		.popover-buttons > .button:first-of-type {
-			border-left: solid 1px #007aff;
-			border-top-left-radius: 4px;
-			border-bottom-left-radius: 4px;
+		.button.recipes   {
+			-webkit-mask-image: url('css/images/icons/Download.svg');
 		}
-		.popover-buttons > .button:last-of-type {
-			border-top-right-radius: 4px;
-			border-bottom-right-radius: 4px;
+		.button.top_rated  {
+			-webkit-mask-image: url('css/images/icons/Favorite.svg');
 		}
-		.popover-buttons > .button:hover {
-			color: #fff;
-   		background-color: #007aff;
-		}
+
 	</style>
 	<script src="js/lib/chocolatechip-3.0.4.js"></script>
 	<script src="js/lib/chui-3.0.4.js"></script>
 	<script src="js/app/app.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			
-			////////////////////
-			// Segmented Control
-			////////////////////
+			var segmentedOptions = {
+				id: 'bizCategories',
+				imagePath : "css/images/",
+		     	icons : ["music", "pictures", "docs", "recipes", "top_rated"],
+		      	labels : ["Home Services", "Health", "Restaurants", "Business Services"],
+				selected: 1
+			};
+			var segmentedResponse = function(e) {
+				e.stopPropagation();
+				$('#output').find('h3 > span').html(($(this).index() + 1));
+			};
+			var newSegmented = $.UICreateSegmented(segmentedOptions);
+			$('#segmentedPanel').append(newSegmented);
+			$('.segmented').UISegmented({callback:segmentedResponse});
 			$('.segmented').UIPanelToggle('#toggle-panels',function(){$.noop;});
-    		
-    		//////////////
-    		// Select List
-    		//////////////
-    		if (window.jQuery) {
-				if ($('.select li').is('.selected')) {
-					$("#select-response").html($('.select li.selected')[0].textContent);
-				}    		
-    		} else {
-				if ($('.select li').is('.selected')[0]) {
-					$("#select-response").html($('.select li').is('.selected')[0].textContent);
-				}    		}
-
-			// Select list callback:
-			$('.list.select').UISelectList({
-    			selected: 0,
-    			callback: function() {
-    				$("#select-response").html($(this).text());
-    			}
-    		});
-    		
-    		/////////////////
-    		// Switch Control
-    		/////////////////
-    		
-    		// Define switches
-			var sleepSwitch = {
-				id : "sleepSwitch",
-				state : "on",
-				name : "activity.choice",
-				value: "sleep"
-			};
-			var vacationSwitch = {
-				id : "vacationSwitch",
-				state : "off",
-				name : "activity.choice",
-				value : "vacation"
-			};
-			var breakfastSwitch = {
-				id : "breakfastSwitch",
-				state : "off",
-				name : "activity.choice",
-				value : "breakfast"
-			};
-			
-			// Insert switches into list:
-			$('#switches aside').each(function(ctx, idx) {
-				var temp;
-				if (window.jQuery) {
-					temp = ctx;
-					ctx = idx;
-					idx = temp;
-				}
-				switch (idx){
-					case 0:
-						$(ctx).prepend($.UICreateSwitch(sleepSwitch));
-						break;
-					case 1:
-						$(ctx).prepend($.UICreateSwitch(vacationSwitch));
-						break;
-					case 2:
-						$(ctx).prepend($.UICreateSwitch(breakfastSwitch));
-						break;
-				}
-			})
-			// Initialize switches:
-			$('.switch').UISwitch();
-			
-			
-			// Set response to last checked switch for page load state:
-			$('.switch').each(function(ctx, idx) {
-				if (window.jQuery) ctx = idx;
-				if (ctx.classList.contains('on')) {
-					$('#switch-response').html($(ctx).find('input').val());
-				}
-			});
-			
-			// Set switch's checkbox value:
-			var handleSwitch = function(_switch) {
-				var value = '';
-				if (_switch.classList.contains('on')) {
-					value = $(_switch).find('input').val();
-					$('#switch-response').html(value);
-				} else {
-					$('#switch-response').empty();
-				}
-			};
-			$.body.on('singletap', '.switch', function() {
-				handleSwitch(this);
-			});
-			
-			////////////////////
-			// Setup Range Input
-			////////////////////
-			$('#rangeValue1').html($('#rangeControl1').val());
-			$('#rangeControl1').on('change', function() {
-				$('#rangeValue1').html($(this).val());
-			});
-			
-			$('#rangeValue2').html($('#rangeControl2').val());
-			$('#rangeControl2').on('change', function() {
-				$('#rangeValue2').html($(this).val());
-			});		
-			
-			////////////////
-			// Stepper Setup
-			////////////////	
-			$('#digits').UIStepper({  
-				start: 1,
-				end: 8,
-				defaultValue: 3
-			});
-			
-    		///////////////////////
-    		// Setup Deletable list
-    		///////////////////////
-    		$.UIDeletable({
-        		list: '#deletables', 
-        		callback: function(item) {
-        			var text = $(item).siblings('h3').text();
-        			$('#deletable-response').html('You deleted: <strong>' + text + '</strong>');
-        		}
-        	});
-
-			///////////////////
-			// Initialize Popup
-			///////////////////
-			$("#openPopup").bind("singletap", function() {
-				$.UIPopup({
-					id: "warning",
-					title: 'Attention Viewers!', 
-					message: 'The performance of "Merchant of Venice", Act 4 scene 1, will begin shortly. Thank you for your patience.', 
-					cancelButton: 'Skip', 
-					continueButton: 'Stay', 
-					callback: function() {
-						var popupMessageTarget = document.querySelector('#popupMessageTarget');
-						popupMessageTarget.textContent = 'Thanks for staying with us a bit longer.';
-						popupMessageTarget.className = "";
-						popupMessageTarget.className = "animatePopupMessage";
-					}
-				});
-			});
-			
-				//////////////////////
-				// Setup for Popovers:
-				//////////////////////
-        
-        		// Content for Popovers:
-        		var popover1Content = "<ul class='list'><li><h3>Apples</h3></li><li><h3>Oranges</h3></li><li><h3>Bananas</h3></li><li><h3>Pears</h3></li><li><h3>Plums</h3></li><li><h3>Cherries</h3></li><li><h3>Apricots</h3></li><li><h3>Lemons</h3></li><li><h3>Peaches</h3></li><li><h3>Pineapples</h3></li><li><h3>Strawberries</h3></li><li><h3>Guavas</h3></li><li><h3>Grapefruit</h3></li></ul>";
-        		
-        		var popover2Content = "<ul class='list'><li><h3>Cake</h3></li><li><h3>Ice cream</h3></li><li><h3>Pies</h3></li><li><h3>Tiramisu</h3></li><li><h3>Cupcakes</h3></li><li><h3>Donuts</h3></li><li><h3>Cookies</h3></li><li><h3>Cobbler</h3></li><li><h3>Crepes</h3></li><li><h3>Tarts</h3></li><li><h3>Custard</h3></li><li><h3>Pudding</h3></li><li><h3>Fudge</h3></li><li><h3>Turnovers</h3></li><li><h3>Eclairs</h3></li></ul>";
-        		
-				// Callback for Popovers:
-            var fillPopover1 = function(popover) {
-            	// Populate Popover with content:
-					$('.popover').find('section').append(popover1Content);
-					popoverEventHandler();
-            };
-            
-            var fillPopover2 = function(popover) {
-            	// Populate Popover with content:
-					$('.popover').find('section').append(popover2Content);
-					popoverEventHandler();
-            };
-            
-            var popoverEventHandler = function() {
-					// Attach event to catch user interaction.
-					// Use singletap to allow user to scroll content.
-					$('.popover').on('singletap', function(e) {
-						var results;
-						if (this.id === 'fruitsPopover') {
-							results = '#fruitsChoice';
-						} else if(this.id === 'desertsPopover') {
-							results = '#desertsChoice';
-						}
-						var listItem;
-						if (e.target.nodeName === 'LI') {
-							$(results).html(e.target.textContent.trim());
-						} else {
-							listItem = $(e.target).closest('li')[0];
-							$(results).html(listItem.textContent.trim());
-						}
-						$.UIPopoverClose();
-					});
-				};
-            
-            // Initialize Popover:
-            $('#showPopover1').UIPopover({
-            	id: 'fruitsPopover', 
-            	title: "Fruits", 
-            	callback: fillPopover1
-            });
-            // Initialize Popover:
-            $('#showPopover2').UIPopover({
-            	id: 'desertsPopover', 
-            	title: "Deserts", 
-            	callback: fillPopover2
-            });			
-			   
-			   ///////////////////////////
-			   // Setup Horizontal Paging:
-			   ///////////////////////////
-			   $.UIPaging();
-			   
-			   //////////////
-			   // Setup Sheet
-			   //////////////
-			   $.UISheet();
-				$('.sheet').find('section').append('<h2>Available Options</h2>');
-				$('.sheet').find('section').append("<ul class='list'></li>");
-				var list = $('.sheet .list');
-				list.append('<li><a class="button" href="javascript:void(null)">Save</a></li>');
-				list.append('<li><a class="button" href="javascript:void(null)">Delete</a></li>');
-				list.append('<li><a class="button" href="javascript:void(null)">Cancel</a></li>');
-				list.on('singletap', '.button', function() {
-					$.UIHideSheet();
-				});
-			// Initialize button to show sheet:
-			$('#showSheet').on('singletap', function() {
-				$.UIShowSheet();
-			});
-			$('#sheetBackButton').on($.eventStart, function() {
-				$.UIHideSheet();
-			});
+			var selectedPanel = $('.segmented').find('.selected').index();
 		});
 	</script>
-	<style>
-		#select-response,
-		#switch-response,
-		#deletable-response,
-		#fruitsChoice,
-		#desertsChoice {
-			color: #007aff;
-			text-transform: capitalize;
-		}
-		.sheet .button {
-			min-width: 200px;
-			width: 80%;
-		}
-	</style>
 </head>
 <body>
 	<nav>
-		<a class='button back'>Home</a>
-		<h1>pportunity Fund Businesses</h1>
-		<div class='segmented paging horizontal align-flush'>
-			 <a class='button' href='javascript:void(null)' title='previous panel'></a>
-			 <a class='button' href='javascript:void(null)' title='next panel'></a>
-		</div>
+		<h1>Bussinesses Nearby</h1>
 	</nav>
-	<article id='paging-article' class='current paging'>
-		<section>			
-			<ul class='list'>
-				<li class='nav'>
-					<h3>People</h3>
-					<h4>Your Friends</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
-				</li>
-				<li class='nav'>
-					<h3>Places</h3>
-					<h4>Interesting Destinations</h4>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-				</li>
-				<li class='nav'>
-					<h3>Things</h3>
-					<h4>Stuff that's Just Weird</h4>
-					<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-				</li>
-				<li class='nav'>
-					<h3>Animals</h3>
-					<h4>Critters from Around the Globe</h4>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-				</li>
-				<li class='nav'>
-					<h3>Food</h3>
-					<h4>Restaurants</h4>
-					<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus.</p>
-				</li>
-			</ul>
-		</section>
+	<article id="main" class="current">
 		<section>
-			<ul class='list'>
-				<li class='show-detail' href='javascript:void(null)'>
-					<img title='Blues' src="../images/music/Willy Moon.png" height='100px'>
-					<h3>Willy Moon</h3>
-					<h4>Yeah Yeah</h4>
-					<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus.</p>
-				</li>
-				<li class='show-detail' href='javascript:void(null)'>
-					<img title='Classical' src="../images/music/The Olms.png" height='100px'>
-					<h3>The Olms</h3>
-					<h4>Wanna Feel It</h4>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-				</li>
-				<li class='show-detail' href='javascript:void(null)'>
-					<img title='iTunes' src="../images/music/Kiss.png" height='100px'>
-					<h3>Kiss</h3>
-					<h4>This Kiss</h4>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-				</li>
-				<li class='show-detail' href='javascript:void(null)'>
-					<img title='Killers' src="../images/music/Permanent.png" height='100px'>
-					<h3>David Cook</h3>
-					<h4>Permanent</h4>
-					<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-				</li>
-				<li class='show-detail' href='javascript:void(null)'>
-					<img title='Killers' src="../images/music/Imagine Dragons.png" height='100px'>
-					<h3>Imagine Dragons</h3>
-					<h4>Radioactive</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
-				</li>
-			</ul>	
-		</section>	
-		<section>
-			<h2>Music</h2>
-			<ul class='list'>
-				<li class='comp'>
-					<aside>
-						<img title='Imagine Dragons' src="../images/music/Imagine Dragons.png" height="80px">
-					</aside>
-					<div>
-						<h3>Imagine Dragons</h3>
-						<h4>Radioactive</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
-					</div>
-					<aside>
-						<span class='show-detail'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<img title='Hurry and Harm' src="../images/music/Hurry and Harm.png" height="80px">
-					</aside>
-					<div>
-						<h3>The Hurry and the Harm</h3>
-						<h4>Hurt</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-					</div>
-					<aside>
-						<span class='show-detail'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<img title='Permanent' src="../images/music/Permanent.png" height="80px">
-					</aside>
-					<div>
-						<h3>David Cook</h3>
-						<h4>Permanent</h4>
-						<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-					</div>
-					<aside>
-						<span class='show-detail'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<img title='Kiss' src="../images/music/Kiss.png" height="80px">
-					</aside>
-					<div>
-						<h3>Kiss</h3>
-						<h4>This Kiss</h4>
-						<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-					</div>
-					<aside>
-						<span class='show-detail'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<img title='Willy Moon' src="../images/music/Willy Moon.png" height="80px">
-					</aside>
-					<div>
-						<h3>Willy Moon</h3>
-						<h4>Yeah Yeah</h4>
-						<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus.</p>
-					</div>
-					<aside>
-						<span class='show-detail'></span>
-					</aside>
-				</li>
-			</ul>		
-		</section>
-		<section>
-			<ul class='list'>
-				<li class='switched'>
-					<h3>People</h3>
-					<h4>Your Friends</h4>
-				</li>
-				<li class='switched'>
-					<h3>Places</h3>
-					<h4>Interesting Destinations</h4>
-				</li>
-				<li class='switched'>
-					<h3>Funny Animals</h3>
-					<h4>Critters from Around the Globe</h4>
-				</li>
-				<li class='switched'>
-					<h3>Food</h3>
-					<h4>Recipes</h4>
-				</li>
-				<li class='switched'>
-					<h3>Good Eats</h3>
-					<h4>Restaurants</h4>
-				</li>
-			</ul>	
-		</section>
-		<section>
-			<ul class='list'>
-				<li class='comp'>
-					<div>
-						<h3>People</h3>
-					</div>
-					<aside>
-						<h4>Your Friends</h4>
-						<span class='date-time'>Monday</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Places</h3>
-					</div>
-					<aside>
-						<h4>Interesting Destinations</h4>
-						<span class='date-time'>3/14/10</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Funny Animals</h3>
-					</div>
-					<aside>
-						<h4>Critters from Around the Globe</h4>
-						<span class='date-time'>12:30 PM</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Food</h3>
-					</div>
-					<aside>
-						<h4>Recipes</h4>
-						<span class='date-time'>Noon</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Good Eats</h3>
-					</div>
-					<aside>
-						<h4>Restaurants</h4>
-						<span class='date-time'>Next Week</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-			</ul>	
-		</section>
-		<section>
-			<ul class='list'>
-				<li class='comp'>
-					<div>
-						<h3>People</h3>
-					</div>
-					<aside>
-						<h4>Your Friends</h4>
-						<span class='counter'>22</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Places</h3>
-					</div>
-					<aside>
-						<h4>Destinations</h4>
-						<span class='counter'>32</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Animals</h3>
-					</div>
-					<aside>
-						<h4>Funny Critters</h4>
-						<span class='counter'>5</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Food</h3>
-					</div>
-					<aside>
-						<h4>Recipes</h4>
-						<span class='counter'>43</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<div>
-						<h3>Good Eats</h3>
-					</div>
-					<aside>
-						<h4>Restaurants</h4>
-						<span class='counter'>129</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-			</ul>	
-		</section>
-		<section>
-			<ul class='list'>
-				<li class='comp'>
-					<aside>
-						<span class='icon weather'></span>
-					</aside>
-					<div>
-						<h3>Weather</h3>
-					</div>
-					<aside>
-						<h4>Alerts</h4>
-						<span class='counter'>2</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<span class='icon music'></span>
-					</aside>
-					<div>
-						<h3>Music</h3>
-					</div>
-					<aside>
-						<h4>New Purchases</h4>
-						<span class='counter'>16</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<span class='icon mail'></span>
-					</aside>
-					<div>
-						<h3>Mail</h3>
-					</div>
-					<aside>
-						<h4>New</h4>
-						<span class='counter'>134</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<span class='icon browser'></span>
-					</aside>
-					<div>
-						<h3>Browser</h3>
-					</div>
-					<aside>
-						<h4>Bookmarks</h4>
-						<span class='counter'>22</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-				<li class='comp'>
-					<aside>
-						<span class='icon app'></span>
-					</aside>
-					<div>
-						<h3>Apps</h3>
-					</div>
-					<aside>
-						<h4>Updates</h4>
-						<span class='counter'>3</span>
-						<span class='nav'></span>
-					</aside>
-				</li>
-			</ul>
-			<p>Example of icons in list items.</p>
+			<div id='segmentedPanel' class='horizontal centered'></div>
+			<div id="toggle-panels">
+				<div>
+					<ul class='list'>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Imagine Dragons' src="css/images/music/Imagine Dragons.png" height="80px">
+							</aside>
+							<div>
+								<h3>Imagine Dragons</h3>
+								<h4>Radioactive</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Willy Moon' src="css/images/music/Willy Moon.png" height="80px">
+							</aside>
+							<div>
+								<h3>Willy Moon</h3>
+								<h4>Yeah Yeah</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+					</ul>				
+				</div>
+				<div>
+					<ul class='list'>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Permanent' src="css/images/music/Permanent.png" height="80px">
+							</aside>
+							<div>
+								<h3>David Cook</h3>
+								<h4>Permanent</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Kiss' src="css/images/music/Kiss.png" height="80px">
+							</aside>
+							<div>
+								<h3>Kiss</h3>
+								<h4>This Kiss</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+					</ul>	
+				</div>
+				<div>
+					<ul class='list'>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+					</ul>	
+				</div>
+				<div>
+					<ul class='list'>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+					</ul>	
+				</div>
+				<div>
+					<ul class='list'>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+					</ul>	
+				</div>
+				<div>
+					<ul class='list'>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+						<li class='comp' data-goto>
+							<aside>
+								<img title='Hurry and Harm' src="css/images/music/Hurry and Harm.png" height="80px">
+							</aside>
+							<div>
+								<h3>The Hurry and the Harm</h3>
+								<h4>Hurt</h4>
+							</div>
+							<aside>
+								<span class='show-detail'></span>
+							</aside>
+						</li>
+					</ul>	
+				</div>
+			</div>
 		</section>
 	</article>
 </body>
