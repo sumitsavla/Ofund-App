@@ -31,12 +31,14 @@ $(function() {
   			   	alert("Unable to get location information!");
   			   });
     		} else {
-    			alert("Geolocation is not supported by this browser.");
+    			util.getLatLong();
+    			//alert("Geolocation is not supported by this browser.");
+    			
 			}
 		},
 
 		getLatLong: function(position) {
-			API.listByLocation(position.coords.latitude, position.coords.longitude, this.displayLocalListings, 1);
+			API.listByLocation(37.376823699999996, -121.92294779999997, this.displayLocalListings, 1);
 		},
 
 		displayLocalListings: function(listingsArr) {
