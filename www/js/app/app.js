@@ -1,5 +1,5 @@
 $(function() {
-	var util, selectedCatEl, segmentedOptions = {
+	var util, selectedCatEl, currentListingArr, segmentedOptions = {
 		id: 'bizCategories',
       	labels : ["Home Services", "Health", "Restaurants", "Business Services", "Shopping", "Travel"],
 		selected: 1
@@ -35,13 +35,13 @@ $(function() {
 		},
 
 		getLatLong: function(position) {
-		//	util.displayLocalListings(position);
 			API.listByLocation(position.coords.latitude, position.coords.longitude, this.displayLocalListings, 1);
 		},
 
 		displayLocalListings: function(listingsArr) {
 			console.log(listingsArr);
-			
+			currentListingArr = listingsArr;
+			$("#nearby .list").empty();
 			$("#nearby .list").append(util.genListingContent(listingsArr))
 			$("#nearby").show();
 		},
@@ -63,7 +63,9 @@ $(function() {
 		},
 
 		displayListings: function(data){
-			$(selectedCatEl+" .list").append(util.genListingContent(listingsArr))
+			currentListingArr = data;
+			$(selectedCatEl+" .list").empty();
+			$(selectedCatEl+" .list").append(util.genListingContent(data))
 			$(selectedCatEl).show();
 		},
 
