@@ -1,5 +1,5 @@
 $(function() {
-	var util, selectedCatEl, currentListingArr, segmentedOptions = {
+	var util, selectedCatEl, bizimage,currentListingArr, segmentedOptions = {
 		id: 'bizCategories',
       	labels : ["Home Services", "Health", "Restaurants", "Business Services", "Shopping", "Travel"],
 		selected: 1
@@ -54,7 +54,7 @@ $(function() {
 			for(i = 0; i < listingsArr.length; i++) {
 				listingContent = listingContent + "<li class='comp'>\
 							<aside>\
-								<img title='Hurry and Harm' src='css/images/icons/biz.jpeg' height='80px'>\
+								<img title='Hurry and Harm' src="+bizimage+" height='80px'>\
 							</aside>\
 							<div>\
 								<h3>"+util.toTitleCase(listingsArr[i].name)+"</h3>\
@@ -82,7 +82,7 @@ $(function() {
 	$('#homeBtn').on('click', function(evt) {
 		
 		selectedCatEl = $("#"+evt.target.id);
-		
+		bizimage = "css/images/icon/home.jpeg";
 		API.listByCategory("home_services", util.displayListings, 1);
 		$("#keyword").val("Home Services")
 		selectedCatEl.css("background-color","#b5c03a");
@@ -93,6 +93,7 @@ $(function() {
 	});
 	$('#healthBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
+		bizimage = "css/images/icon/home.jpeg";
 		selectedCatEl.css("background-color","#b5c03a");
 		window.setTimeout(function(){
 			console.log("dsd");
@@ -105,6 +106,7 @@ $(function() {
 	});
 	$('#bizBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
+		bizimage = "css/images/icon/bizs.jpeg";
 				$("#keyword").val("Business Services")
 
 	selectedCatEl.css("background-color","#b5c03a");
@@ -116,6 +118,7 @@ $(function() {
 	});
 	$('#restaurantsBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
+		bizimage = "css/images/icon/rest.jpeg";
 				$("#keyword").val("Restaurants")
 
 	selectedCatEl.css("background-color","#b5c03a");
@@ -127,6 +130,7 @@ $(function() {
 	});
 	$('#shoppingBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
+		bizimage = "css/images/icon/home.jpeg";
 				$("#keyword").val("Shopping")
 
 	selectedCatEl.css("background-color","#b5c03a");
@@ -138,6 +142,7 @@ $(function() {
 	});
 	$('#travelBtn').on('click', function(evt) {
 		selectedCatEl = $("#"+evt.target.id);
+		bizimage = "css/images/icon/travel.jpeg";
 				$("#keyword").val("Travel")
 selectedCatEl.css("background-color","#b5c03a");
 		window.setTimeout(function(){
