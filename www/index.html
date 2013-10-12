@@ -74,17 +74,17 @@
   			position: relative;
   			width: 1.1em;
 		}
-		.rating > span:hover:before,
+		.rating:first-of-type > span:hover:before,
 		.rating > span:hover ~ span:before {
-   		content: "\2605";
-   		position: absolute;
+   			content: "\2605";
+   			position: absolute;
 		}
 		#map-canvas {
        display: block;
      height:90%; 
      width:100%; 
      position:fixed;
-     top:220px;
+     top:270px;
      padding: 1px 25px 25px 25px;
       }	
 
@@ -135,7 +135,7 @@ padding-right: 0px;">
 				<form>
 					<div id = "searchField"> 
 						<img src="css/images/icons/appstoreicon.png" style="margin-bottom: -13px;width: 35px;height: 35px;display: inline;">
-						<input id="keyword" type="text" name="keyword" placeholder = "Search business" autocorrect="off" style="width: 80%;height: 23px;">
+						<input id="keyword" type="text" name="keyword" placeholder = "Search business" autocorrect="off" style="width: 80%;height: 23px;border-radius:2px;border:1px solid #efeff4;">
 					<!--	<img src="css/images/icons/icon_search.gif" style="margin-bottom: -3px;"> -->
 					</div>
 				</form>
@@ -157,7 +157,6 @@ padding-right: 0px;">
 				
 				<div id="home">
 					<ul class='list'>
-						
 					</ul>	
 				</div>
 				<div id="health">
@@ -202,11 +201,15 @@ padding-right: 0px;">
 	
 	<article id="details" >
 		<section>
-			<nav>
-				<img id = "back_button" style="margin-left:0; margin-top:10px" src="css/images/icons/arrow_left.svg" height = "30px" width = "40px" >
-				<h4 id="biz_name" style="margin-left:60px; margin-right:auto;" > BizName</h4>
-			</nav>
-			<ul class='list'>
+			<div>
+				<h2 style="background-color: #efeff4;">Mondo Burrito</h2>
+			</div>
+			<ul class='list' style="background-color: #efeff4 !important;">
+			<li>
+				2045 Martin Avenue
+				Santa  Clara
+				CA 95050
+			</li>				
     		<li>
     			<table>
     				<tr>
@@ -214,10 +217,10 @@ padding-right: 0px;">
     						<div class="rating">		
 								<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>
-    						<p id="biz_phone">Phone</p>
+    						<p id="biz_phone">407-898-8765</p>
     					</td>
     					<td>
-    						<img id ="biz_img" style="margin-left:70px; margin-right:auto;" src="" height = "70px" width = "70px" >
+    						<img id ="biz_img" style="border-radius: 3px;width:120px;height:100px;margin-left:50px; margin-bottom:15px;" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTDKUniCm5HI8oT7nqaXHhJhA_PDo6y7iqlpI-EOnm5bvnNssEt" >
     					</td>
     				</tr>
     			</table>
