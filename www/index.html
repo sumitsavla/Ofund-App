@@ -102,30 +102,32 @@
 	<nav id="pageHeader" style="width: 100%;
 padding-left: 0px;
 padding-right: 0px;">
-		<div id="searchForm" style="width: 100%;margin-bottom: 15px;margin-top: 45px;">
-				<form>
-					<div id = "searchField"> 
-						<img src="css/images/icons/appstoreicon.png" style="margin-bottom: -20px;width: 44px;height: 44px;display: inline;">
-						<input id="keyword" type="text" name="keyword" placeholder = "Search business" autocorrect="off" style="width: 80%;height: 32px;line-height: 32px;border-radius:2px;border:1px solid #efeff4;">
-					<!--	<img src="css/images/icons/icon_search.gif" style="margin-bottom: -3px;"> -->
-					</div>
-				</form>
-			</div>
+
+		
 	</nav>
-	<article id="main" class="current">
-		<section style="padding: 0px;" >
-			<div id="segmentedPanel" class="horizontal centered" style="display: inline;">
-				<div class="segmented" style="margin:0px;margin-top: 90px;">
-					<a id = "homeBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/HomeServices.png') no-repeat;background-position:center;width:50px;" ></a>
-					<a id = "healthBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/health.png') no-repeat;background-position:center;width:50px;"></a>
-					<a id = "restaurantsBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/restaurant.png') no-repeat;background-position:center;width:50px;"></a>
-					<a id = "bizBtn" role="radio" class="button catIcon selected" aria-checked="true" style="background: url('css/images/icons/businessservices.png') no-repeat;background-position:center;width:50px;"></a>
-					<a id = "shoppingBtn" role="radio" class="button catIcon" aria-checked="true" style="background: url('css/images/icons/shopping.png') no-repeat;background-position:center;width:50px;"></a>
-					<a id = "travelBtn" role="radio" class="button catIcon" aria-checked="true" style="background: url('css/images/icons/travel.png') no-repeat;background-position:center;width:50px;"></a>
-				</div>
+	<div id="searchForm" style="width: 100%;margin-bottom: 0px;margin-top: 50px;">
+		<form>
+			<div id = "searchField"> 
+				<img src="css/images/icons/appstoreicon.png" style="margin-bottom: -20px;width: 44px;height: 44px;display: inline;">
+				<input id="keyword" type="search" name="keyword" placeholder = "Search business" autocorrect="off" style="width: 70%;height: 28px;line-height: 20px;border-radius:2px;border:1px solid #efeff4;">
+				<img id="searchBtn" src="css/images/icons/icon_search.gif" style="margin-bottom: -3px;"> 
 			</div>
+		</form>
+	</div>
+	<div id="segmentedPanel"  class="horizontal centered" style="margin-top: 5px;">
+		<div class="segmented"  style="margin:0px;margin-top:5px;">
+			<a id = "homeBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/HomeServices.png') no-repeat;background-position:center;width:50px;" ></a>
+			<a id = "healthBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/health.png') no-repeat;background-position:center;width:50px;"></a>
+			<a id = "restaurantsBtn" role="radio" class="button catIcon" style="background: url('css/images/icons/restaurant.png') no-repeat;background-position:center;width:50px;"></a>
+			<a id = "bizBtn" role="radio" class="button catIcon selected" aria-checked="true" style="background: url('css/images/icons/businessservices.png') no-repeat;background-position:center;width:50px;"></a>
+			<a id = "shoppingBtn" role="radio" class="button catIcon" aria-checked="true" style="background: url('css/images/icons/shopping.png') no-repeat;background-position:center;width:50px;"></a>
+			<a id = "travelBtn" role="radio" class="button catIcon" aria-checked="true" style="background: url('css/images/icons/travel.png') no-repeat;background-position:center;width:50px;"></a>
+		</div>
+	</div>
+	<article id="main" class="current" style="margin:0px;margin-top: 145px;">
+
+		<section style="padding: 0px;" >
 			<div id="toggle-panels">
-				
 				<div id="home">
 					<ul class='list'>
 					</ul>	
@@ -155,11 +157,6 @@ padding-right: 0px;">
 						
 					</ul>	
 				</div>
-				<div id = "nearby">
-					<ul class='list'>
-						
-					</ul>	
-				</div>
 			</div>
 		</section>
 	</article>
@@ -176,7 +173,7 @@ padding-right: 0px;">
 				<h2 style="background-color: #efeff4;">Mondo Burrito</h2>
 			</div>
 			<ul class='list' style="background-color: #efeff4 !important;">
-			<li>
+			<li class='address'>
 				2045 Martin Avenue
 				Santa  Clara
 				CA 95050

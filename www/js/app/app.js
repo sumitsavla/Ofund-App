@@ -3,7 +3,7 @@ $(function() {
 	currentListingArr, segmentedOptions = {
 		id: 'bizCategories',
       	labels : ["Home Services", "Health", "Restaurants", "Business Services", "Shopping", "Travel"],
-		selected: 1
+		selected: 3
 	};
 
 	var segmentedResponse = function(e) {
@@ -43,17 +43,16 @@ $(function() {
 		},
 
 		displayLocalListings: function(listingsArr) {
-			console.log(listingsArr);
 			currentListingArr = listingsArr;
-			$("#nearby .list").empty();
-			$("#nearby .list").append(util.genListingContent(listingsArr))
-			$("#nearby").show();
+			$("#home .list").empty();
+			$("#home .list").append(util.genListingContent(listingsArr))
+			$("#home").show();
 		},
 
 		genListingContent: function(listingsArr){
 			var i, listingContent = ""; 
 			for(i = 0; i < listingsArr.length; i++) {
-				listingContent = listingContent + "<li class='comp'>\
+				listingContent = listingContent + "<li class='comp' data-goto='#details'>\
 							<aside>\
 								<img title='Hurry and Harm' src='"+bizimage+"' height='80px'>\
 							</aside>\
@@ -70,7 +69,7 @@ $(function() {
 		displayListings: function(data){
 			currentListingArr = data;
 			$(selectedCatEl+" .list").empty();
-			$(selectedCatEl+" .list").append(util.genListingContent(data))
+			$(selectedCatEl+" .list").append(util.genListingContent(data));
 			$(selectedCatEl).show();
 		},
 
@@ -159,11 +158,18 @@ selectedCatEl.css("background-color","#b5c03a");
 		$('#donate').removeClass('previous');
 		$.UIGoToArticle('#donate');
 	});
-	$('ul.list').on('click', function(evt) {
-		$('#details').removeClass('previous');
-		$.UIGoToArticle('#details');
-		$('#details').removeClass('previous');
-	});
+	$('#travel .list').on('singletap', 'li', function() {
+	alert('clicked');
+    var whichitem = $('#travel .list').index( "li" );
+    alert(whichitem);
+    // output the chosen song's data to the songDetail article:
+    $('#details').find(h2).text(currentListingArr[whichitem].name);
+    $('#details .address').text(currentListingArr[whichitem].city);
+    $('#details').removeClass('previous');
+	$.UIGoToArticle('#details');
+   // $('#details').find(h3).text(songs[whichSong].artist);
+  //  $('#details').find(p).text(songs[whichSong].description);
+})
 	$('#nearbyBtn').on('click', function(evt) {
 		$('#main').attr('class',' current ');
 		$('#pageHeader').removeClass('previous');
@@ -172,30 +178,10 @@ selectedCatEl.css("background-color","#b5c03a");
 		$('#main').attr('class',' current ');
 		$('#pageHeader').removeClass('previous');
 	});
-	$('#searchForm').on('submit', function(evt) {
-		selectedCatEl = $("#nearby");
-		API.listByKeyword($("#keyword").val(), util.displayListings, 1);
-	});
-
-
-	$(document).ready(function() {
-		console.log('touch start');
-	//	document.addEventListener("touchstart", function() {},false);
-	 $("a").each(function() { // have to use an `each` here - either a jQuery `each` or a `for(...)` loop
-                var onClick; // this will be a function
-                var firstClick = function() {
-                    onClick = secondClick;
-                    return false;
-                };
-                var secondClick = function() {
-                    onClick = firstClick;
-                    return true;
-                };
-                onClick = firstClick;
-                $(this).click(function() {
-                    return onClick();
-                });
-            });
+	$('#searchBtn').on('click', function(evt) {
+		//alert('clicked');
+		selectedCatEl = "#home";
+		API.listByKeyword($("#keyword").val(), util.displayLocalListings, 1);
 	});
 	
 });
