@@ -158,25 +158,21 @@ selectedCatEl.css("background-color","#b5c03a");
 		$('#donate').removeClass('previous');
 		$.UIGoToArticle('#donate');
 	});
-	$('#travel .list').on('singletap', 'li', function() {
-	alert('clicked');
-    var whichitem = $('#travel .list').index( "li" );
-    alert(whichitem);
-    // output the chosen song's data to the songDetail article:
-    $('#details').find(h2).text(currentListingArr[whichitem].name);
-    $('#details .address').text(currentListingArr[whichitem].city);
-    $('#details').removeClass('previous');
-	$.UIGoToArticle('#details');
-   // $('#details').find(h3).text(songs[whichSong].artist);
-  //  $('#details').find(p).text(songs[whichSong].description);
-})
+	$('.list').on('singletap', 'li', function(evt) {
+	//	alert('ckicke');
+		$('#details').removeClass('previous');
+		$.UIGoToArticle('#details');
+	});
 	$('#nearbyBtn').on('click', function(evt) {
 		$('#main').attr('class',' current ');
 		$('#pageHeader').removeClass('previous');
+		$('#segmentedPanel').removeClass('previous');
 		$.UIGoToArticle('#main');
 		util.getLatLong();
 		$('#main').attr('class',' current ');
+		$('#segmentedPanel').attr('class',' current ');
 		$('#pageHeader').removeClass('previous');
+		$('#segmentedPanel').removeClass('previous');
 	});
 	$('#searchBtn').on('click', function(evt) {
 		//alert('clicked');
@@ -185,3 +181,15 @@ selectedCatEl.css("background-color","#b5c03a");
 	});
 	
 });
+
+/******* Exprimental Code ***********/
+	/*console.log(evt.target.parent('.comp'));
+    var whichitem = $('#travel .list').index( evt.target.parent() );
+    console.log(whichitem);
+    // output the chosen song's data to the songDetail article:
+    $('#details').find(h2).text(currentListingArr[whichitem].name);
+    $('#details .address').text(currentListingArr[whichitem].city);
+    $('#details').removeClass('previous');
+	$.UIGoToArticle('#details');
+   // $('#details').find(h3).text(songs[whichSong].artist);
+  //  $('#details').find(p).text(songs[whichSong].description); */
